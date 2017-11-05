@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FieldGroup from './FieldGroup';
 import { Button } from 'react-bootstrap';
+import { Email, Item, Span, A, renderEmail } from 'react-html-email'
 
 class BuyInForm extends Component {
   constructor(props) {
@@ -41,7 +42,42 @@ class BuyInForm extends Component {
     // Add language to form data
     formData.language = this.props.translations.language;
     console.log(formData);
+    this.buildEmail();
   }
+
+
+
+  buildEmail() {
+    const emailHTML = renderEmail(
+      <Email title="Hello World!">
+        <Item align="center">
+          <Span fontSize={20}>
+            This is an example email made with:
+            <A href="https://github.com/chromakode/react-html-email">react-html-email</A>.
+          </Span>
+        </Item>
+      </Email>
+    );
+
+    this.sendMail(emailHTML);
+  }
+
+
+
+  sendMail(data) {
+    // Send email to backend
+    fetch('/mail', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        html: data
+      })
+    });
+  }
+
 
 
   render() {
