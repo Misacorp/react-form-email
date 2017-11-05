@@ -1,4 +1,13 @@
 {
   "language": "French",
-  "brand": "Brandéèé"
+  "brand": {
+    "name": "FR Brand",
+    "help": "FR The brand is the product's manufacturer, whose name can usually be found on the front of the camera or lens.",
+    "placeholder": "FR Nikon, Canon, Leica, ..."
+  },
+  "model": {
+    "name": "FR Model",
+    "help": "FR Camera bodies usually state their model on the front. For lenses you can enter all the text written around the front lens.",
+    "placeholder": "FR D800, 5D Mark III, 50mm f1.4 AF, SB-900 flash, ..."
+  }
 }

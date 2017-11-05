@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Panel, Button } from 'react-bootstrap';
 import './App.css';
 import BuyInForm from './Components/BuyInForm';
 
@@ -24,10 +24,12 @@ class App extends Component {
   render() {
     // Change the button event handlers: https://stackoverflow.com/questions/29810914/react-js-onclick-cant-pass-value-to-method
     return (
-      <div>
-        <Button onClick={() => this.changeLanguage(en)}>{en.language}</Button>
-        <Button onClick={() => this.changeLanguage(fr)}>{fr.language}</Button>
-        <BuyInForm translations={this.state.translations} />
+      <div className="AppPage">
+        <Button onClick={() => this.changeLanguage(en)} className="button--language">{en.language}</Button>
+        <Button onClick={() => this.changeLanguage(fr)} className="button--language">{fr.language}</Button>
+        <Panel className="Panel">
+          <BuyInForm translations={this.state.translations} />
+        </Panel>
       </div>
     );
   }
