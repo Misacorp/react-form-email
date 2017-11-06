@@ -3,7 +3,7 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 
 
-function sendMail(data, cb) {
+function sendMail(data, attachments, cb) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
@@ -15,21 +15,50 @@ function sendMail(data, cb) {
 
   console.log("Sending mail");
   
-  data.to = "uhirv4w67srm6mku@ethereal.email";
-  data.from = "react-form-email@test.service";
+  const mailOptions = {
+    from: "react-form-email@test.service",
+    to: "uhirv4w67srm6mku@ethereal.email",
+    subject: "Testi",
+    html: data,
+    attachments: attachments
+  }
 
-  transporter.sendMail(data, (err, info) => {
+  console.log("Attachments:");
+  console.log(attachments);
+
+  transporter.sendMail(mailOptions, (err, info) => {
     cb(err, info)
   });
 }
 
 
 router.post('/', function(req, res, next) {
-  let mailData = req.body;
+  let mailData = req.body.html;
+  let mailAttachments = req.body.attachments;
 
-  console.log(mailData);
+  // res.status(200);
+  // res.setHeader('Content-Type', 'application/json');
+  // res.send(JSON.stringify({
+  //   message: "Here come dat boi",
+  //   data: mailData,
+  //   attachments: mailAttachments
+  // }));
 
-  sendMail(mailData, (error, response) => {
+  // return;
+
+  // Attachments contains Base64 encoded image data. Build an object:
+  let attachments = [];
+  for(let i = 0; i < mailAttachments.length; i++) {
+    let imageObject = {
+      filename: `product-${i}.jpg`,
+      content: mailAttachments[i].base64,
+      encoding: 'base64'
+    }
+    attachments.push(imageObject);
+    console.log("Pushed image to mail attachment array");
+  }
+
+  sendMail(mailData, attachments, (error, response) => {
     if(error) {
       console.log("Mail error!");
       res.status(500);
