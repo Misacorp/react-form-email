@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Panel, Button } from 'react-bootstrap';
 import './App.css';
-import BuyInForm from './Components/BuyInForm';
+import ProductForm from './Components/ProductForm';
 
 // Translations
 import en from './translations/en.json';
@@ -28,7 +28,7 @@ class App extends Component {
         <Button onClick={() => this.changeLanguage(en)} className="button--language">{en.language}</Button>
         <Button onClick={() => this.changeLanguage(fr)} className="button--language">{fr.language}</Button>
         <Panel className="Panel">
-          <BuyInForm translations={this.state.translations} />
+          <ProductForm translations={this.state.translations} />
         </Panel>
       </div>
     );

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "cors": "^2.8.4",
+    "fetch-error": "^1.0.0",
     "fs": "0.0.1-security",
     "nodemailer": "^4.3.1",
     "react": "^16.0.0",

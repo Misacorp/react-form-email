@@ -3,7 +3,8 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 
 
-function sendMail(data, attachments, cb) {
+// Sends email
+function sendMail(email, cb) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
@@ -19,12 +20,12 @@ function sendMail(data, attachments, cb) {
     from: "react-form-email@test.service",
     to: "uhirv4w67srm6mku@ethereal.email",
     subject: "Testi",
-    html: data,
-    attachments: attachments
+    html: email.html,
+    attachments: email.attachments
   }
 
   console.log("Attachments:");
-  console.log(attachments);
+  console.log(email.attachments);
 
   transporter.sendMail(mailOptions, (err, info) => {
     cb(err, info)
@@ -32,33 +33,41 @@ function sendMail(data, attachments, cb) {
 }
 
 
+
+// Strip Base64 headers
+function stripEncodedHeaders(item) {
+  return item.split(',')[1];
+}
+
+
+
 router.post('/', function(req, res, next) {
-  let mailData = req.body.html;
+  let mailHTML = req.body.html;
   let mailAttachments = req.body.attachments;
-
-  // res.status(200);
-  // res.setHeader('Content-Type', 'application/json');
-  // res.send(JSON.stringify({
-  //   message: "Here come dat boi",
-  //   data: mailData,
-  //   attachments: mailAttachments
-  // }));
-
-  // return;
 
   // Attachments contains Base64 encoded image data. Build an object:
   let attachments = [];
   for(let i = 0; i < mailAttachments.length; i++) {
+    // Remove headers from Base64 string
+    let encodedImage = stripEncodedHeaders(mailAttachments[i].base64);
+
+    // Construct image object
     let imageObject = {
-      filename: `product-${i}.jpg`,
-      content: mailAttachments[i].base64,
-      encoding: 'base64'
+      filename: `product-${i}.png`,
+      content: encodedImage,
+      encoding: 'base64',
+      contentType: mailAttachments[i].type
     }
     attachments.push(imageObject);
     console.log("Pushed image to mail attachment array");
   }
 
-  sendMail(mailData, attachments, (error, response) => {
+  let email = {
+    html: mailHTML,
+    attachments: attachments
+  }
+
+  sendMail(email, (error, response) => {
     if(error) {
       console.log("Mail error!");
       res.status(500);

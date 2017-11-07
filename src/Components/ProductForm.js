@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import FieldGroup from './FieldGroup';
 import { Button } from 'react-bootstrap';
-import { Image, Email, Box, Item, Span, A, renderEmail } from 'react-html-email'
+import { Email, Box, Item, renderEmail } from 'react-html-email'
 import FileBase64 from 'react-file-base64';
+import FetchError from 'fetch-error';
 
-class BuyInForm extends Component {
+class ProductForm extends Component {
   constructor(props) {
     super(props);
     // Gather all input ids on the form into an object. Set their value to empty.
@@ -13,7 +14,6 @@ class BuyInForm extends Component {
     this.state = {
       brand: '',
       model: '',
-      images: [],
       files: []
     }
 
@@ -37,23 +37,6 @@ class BuyInForm extends Component {
   }
 
 
-  handleFileSelect(e) {
-    // Image that was submitted
-    const selectedFile = e.target.files;
-    // Get images from state
-    const newImages = this.state.images;
-    newImages.push(selectedFile);
-    // Get current state
-    const { currentState } = this.state;
-    // Update image array
-    const newState = {
-      images: newImages,
-      ...currentState
-    }
-    this.setState(newState);
-  }
-
-
   getFiles(files) {
     this.setState({
       files: files
@@ -69,7 +52,14 @@ class BuyInForm extends Component {
     // Add language to form data
     formData.language = this.props.translations.language;
     console.log(formData);
-    this.buildEmail();
+
+    // Create and send email
+    const email = {
+      html: this.buildEmail(),
+      attachments: this.state.files
+    }
+
+    this.sendMail(email);
   }
 
 
@@ -85,20 +75,12 @@ class BuyInForm extends Component {
       </Email>
     );
 
-    this.sendMail(emailHTML, this.state.files);
+    return emailHTML;
   }
 
 
   // Send form data to back end form handler.
-  sendMail(data, attachments) {
-    // Base64 encode attachments
-    // console.log("Encoding attachments to Base64");
-    // for(let i = 0; i < attachments.length; i++) {
-    //   let currentFile = attachments[i]
-    //   console.log(currentFile);
-    //   console.log(imageAsBase64);
-    // }
-
+  sendMail(data) {
     // Send email to backend
     fetch('/mail', {
       method: 'POST',
@@ -106,16 +88,31 @@ class BuyInForm extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        html: data,
-        attachments: attachments
-      })
-    }).then((response) => {
-      // Examine the text in the response
-      response.json().then(function(data) {
-        console.log(data);
-      });
+      body: JSON.stringify(data)
+    })
+    .then(this.errorify)
+    .then((response) => {
+      if(response) {
+        response.json();
+      }
+      else {
+        return {
+          status: "error"
+        }
+      }
+    })
+    .then((j) => {
+      console.log(j);
     });
+  }
+
+
+
+  errorify(res) {
+    if (res.status >= 400 && res.status < 600)
+      throw new FetchError(res.status, res.statusText, {response: res})
+    else
+      return res
   }
 
 
@@ -146,14 +143,6 @@ class BuyInForm extends Component {
             onChange={this.handleChangeFor('model')}
           />
 
-          <FieldGroup          
-            id="formControlsFile"
-            type="file"
-            label={translations.image.name}
-            help={translations.image.help}
-            onChange={this.handleFileSelect.bind(this)}
-          />
-
           <FileBase64
             multiple={ true }
             onDone={ this.getFiles.bind(this) }
@@ -166,4 +155,4 @@ class BuyInForm extends Component {
   }
 }
 
-export default BuyInForm;
+export default ProductForm;
