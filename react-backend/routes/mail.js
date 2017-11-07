@@ -25,7 +25,9 @@ function sendMail(email, cb) {
   }
 
   console.log("Attachments:");
-  console.log(email.attachments);
+  for(let i = 0; i < email.attachments.length; i++) {
+    console.log("Filename: " + email.attachments[i].filename);
+  }
 
   transporter.sendMail(mailOptions, (err, info) => {
     cb(err, info)
@@ -34,13 +36,7 @@ function sendMail(email, cb) {
 
 
 
-// Strip Base64 headers
-function stripEncodedHeaders(item) {
-  return item.split(',')[1];
-}
-
-
-
+// Route: POST /mail
 router.post('/', function(req, res, next) {
   let mailHTML = req.body.html;
   let mailAttachments = req.body.attachments;
@@ -49,24 +45,28 @@ router.post('/', function(req, res, next) {
   let attachments = [];
   for(let i = 0; i < mailAttachments.length; i++) {
     // Remove headers from Base64 string
-    let encodedImage = stripEncodedHeaders(mailAttachments[i].base64);
+    let encodedImage = mailAttachments[i].base64.split(',')[1];
+    // Get file extension
+    let extension = mailAttachments[i].type.split('/')[1];
 
     // Construct image object
     let imageObject = {
-      filename: `product-${i}.png`,
+      filename: `product-${i}.${extension}`,
       content: encodedImage,
       encoding: 'base64',
       contentType: mailAttachments[i].type
     }
+    // Push image object to attachments array
     attachments.push(imageObject);
-    console.log("Pushed image to mail attachment array");
   }
 
+  // Construct email object with two parts: HTML and attachments
   let email = {
     html: mailHTML,
     attachments: attachments
   }
 
+  // Send email and handle result
   sendMail(email, (error, response) => {
     if(error) {
       console.log("Mail error!");
@@ -79,12 +79,6 @@ router.post('/', function(req, res, next) {
       res.send( response );
     }
   });
-});
-
-
-router.get('/', function(req, res, next) {
-  res.status(200);
-  res.send({ message: "Route works" });
 });
 
 module.exports = router;

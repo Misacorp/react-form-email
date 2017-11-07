@@ -39,8 +39,13 @@ class ProductForm extends Component {
 
   getFiles(files) {
     this.setState({
-      files: files
-    })
+      files: [
+        ...this.state.files,
+        ...files
+      ]
+    });
+
+    console.log(this.state.files);
   }
 
 
@@ -58,6 +63,9 @@ class ProductForm extends Component {
       html: this.buildEmail(),
       attachments: this.state.files
     }
+
+    console.log("Sending email. Content: ");
+    console.log(email);
 
     this.sendMail(email);
   }
