@@ -1,3 +1,7 @@
+body {
+  background-color: #CCC;
+}
+
 .App {
   text-align: center;
 }
@@ -28,7 +32,7 @@
 }
 
 .AppPage {
-  margin: 1rem;
+  padding: 1rem;
 }
 
 .button--language {
