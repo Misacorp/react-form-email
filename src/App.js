@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Row, Button } from 'react-bootstrap';
+import { Col, Row, Button, Panel } from 'react-bootstrap';
 import './App.css';
 import Product from './Components/Product';
 import ProductFormContainer from './Components/ProductFormContainer';
 import Mailer from './Components/Mailer';
+import UserForm from './Components/UserForm';
 
 // Translations
 import en from './translations/en.json';
@@ -18,8 +19,13 @@ class App extends Component {
       translations: en,
       products: [
         new Product(),
-        new Product("Red", "Boye")
-      ]
+      ],
+      userData: {
+        name: '',
+        phone: '',
+        email: '',
+        country: ''
+      }
     }
 
     this.handleChangeFor = this.handleChangeFor.bind(this);
@@ -51,7 +57,7 @@ class App extends Component {
 
 
   // Handles input value changes. @index is the product's index in this.state.products
-  handleChange(index, event) {
+  handleProductChange(index, event) {
     // Updated product item
     const newProduct = this.state.products[index];
     newProduct.setProperty(event.target.id, event.target.value);
@@ -66,6 +72,17 @@ class App extends Component {
     });
 
 
+  }
+
+
+  handleUserChange(event) {
+    const user = this.state.userData;
+    user[event.target.id] = event.target.value;
+
+    this.setState({
+      userData: user
+    })
+    console.log(this.state.userData);
   }
 
 
@@ -136,28 +153,50 @@ class App extends Component {
     return (
       <div className="AppPage">
         <Row>
-          <Button onClick={() => this.changeLanguage(en)} className="button--language">{en.language}</Button>
-          <Button onClick={() => this.changeLanguage(fr)} className="button--language">{fr.language}</Button>
+          <Col xs={12}>
+            <Button onClick={() => this.changeLanguage(en)} className="button--language">{en.language}</Button>
+            <Button onClick={() => this.changeLanguage(fr)} className="button--language">{fr.language}</Button>
+          </Col>
         </Row>
 
         <Row>
-          <form onSubmit={this.handleSubmit}>
-            <ProductFormContainer
-              translations={this.state.translations}
-              products={this.state.products}
-              handleChange={this.handleChange.bind(this)}
-              getFiles={this.getFiles.bind(this)}
-            />
-            <Row>
-              <Button onClick={this.createProductForm.bind(this)} >
-                New Product
-              </Button>
-            </Row>
+          <Col xs={12}>
+            <form onSubmit={this.handleSubmit}>
+              <ProductFormContainer
+                translations={this.state.translations}
+                products={this.state.products}
+                handleChange={this.handleProductChange.bind(this)}
+                getFiles={this.getFiles.bind(this)}
+              />
 
-            <Row>
-              <Button type="submit" bsSize="large" bsStyle="primary">Submit</Button>
-            </Row>
-          </form>
+              <Row>
+                <Col xs={6}>
+                  <Button onClick={this.createProductForm.bind(this)} >
+                    { this.state.translations.general.newProduct }
+                  </Button>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col xs={12}>
+                  <Panel>
+                    <h2>Contact Information</h2>
+                    <UserForm
+                      translations={ this.state.translations.user }
+                      userData={ this.state.userData }
+                      handleChange={this.handleUserChange.bind(this)}
+                    />
+                  </Panel>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col xs={6}>
+                  <Button type="submit" bsSize="large" bsStyle="primary">{ this.state.translations.general.submit }</Button>
+                </Col>
+              </Row>
+            </form>
+          </Col>
         </Row>
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Col, Row, Panel } from 'react-bootstrap';
 import ProductForm from './ProductForm';
 
 // Takes in an array of Product objects
@@ -10,6 +10,12 @@ class ProductFormContainer extends Component {
 
     return(
       <div>
+        <Row>
+          <Col xs={12}>
+            <h1>{ this.props.translations.general.title }</h1>
+          </Col>
+        </Row>
+
         {products.map((product, index) => 
           <div key={index}>
             <Panel>

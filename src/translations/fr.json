@@ -1,17 +1,51 @@
 {
   "language": "French",
+  "general": {
+    "title": "(FR) Sell to Us",
+    "newProduct": "(FR) New Product",
+    "product": "(FR) Product",
+    "submit": "(FR) Submit"
+  },
   "brand": {
-    "name": "FR Brand",
-    "help": "FR The brand is the product's manufacturer, whose name can usually be found on the front of the camera or lens.",
-    "placeholder": "FR Nikon, Canon, Leica, ..."
+    "name": "(FR) Brand",
+    "help": "(FR) The brand is the product's manufacturer, whose name can usually be found on the front of the camera or lens.",
+    "placeholder": "(FR) Nikon, Canon, Leica, ..."
   },
   "model": {
-    "name": "FR Model",
-    "help": "FR Camera bodies usually state their model on the front. For lenses you can enter all the text written around the front lens.",
-    "placeholder": "FR D800, 5D Mark III, 50mm f1.4 AF, SB-900 flash, ..."
+    "name": "(FR) Model",
+    "help": "(FR) Camera bodies usually state their model on the front. For lenses you can enter all the text written around the front lens.",
+    "placeholder": "(FR) D800, 5D Mark III, 50mm f1.4 AF, SB-900 flash, ..."
   },
-  "image": {
-    "name": "FR Image",
-    "help": "FR Submit an image of your product yo."
+  "condition": {
+    "name": "(FR) Condition",
+    "help": "(FR) What condition is the product in?",
+    "options": {
+      "perfect": "(FR) Perfect – The product works without flaws.",
+      "useable": "(FR) Good – The product has been used, but works as intended.",
+      "broken": "(FR) Broken – The product is mainly for spare parts.",
+      "unknown": "(FR) I don't know."
+    }
+  },
+  "images": {
+    "name": "(FR) Images",
+    "help": "(FR) Add images of your product to help us make a better offer."
+  },
+  "user": {
+    "name": {
+      "name": "(FR) Name",
+      "placeholder": "(FR) My name is..."
+    },
+    "phone": {
+      "name": "(FR) Phone",
+      "placeholder": "(FR) My phone number is..."
+    },
+    "email": {
+      "name": "(FR) Email",
+      "placeholder": "(FR) example@email.com"
+    },
+    "country":  {
+      "name": "(FR) Country",
+      "placeholder": "(FR) I live in..."
+    }
   }
 }

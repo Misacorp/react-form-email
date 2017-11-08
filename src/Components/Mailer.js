@@ -37,7 +37,7 @@ class Mailer {
 
               { product.files.map((file, fileIndex) => 
                 <Item width="100%" key={fileIndex}>
-                  <img width="100%" src={`cid:${index}_${fileIndex}`} />
+                  <img width="100%" src={`cid:${index}_${fileIndex}`} alt={`${product.brand} ${product.model} (${fileIndex + 1} of ${product.files.length})`} />
                 </Item>
               )}
             </Box>

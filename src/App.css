@@ -1,5 +1,5 @@
 body {
-  background-color: #CCC;
+  background-color: #EEE;
   padding: 1rem;
 }
 
@@ -37,6 +37,12 @@ body {
 
 .button--language {
   margin-right: 1rem;
+}
+
+.panel-body {
+  background-color: #FFF;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  border: none;
 }
 
 @keyframes App-logo-spin {

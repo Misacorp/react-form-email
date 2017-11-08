@@ -1,5 +1,11 @@
 {
   "language": "English",
+  "general": {
+    "title": "Sell to Us",
+    "newProduct": "New Product",
+    "product": "Product",
+    "submit": "Submit"
+  },
   "brand": {
     "name": "Brand",
     "help": "The brand is the product's manufacturer, whose name can usually be found on the front of the camera or lens.",
@@ -10,8 +16,36 @@
     "help": "Camera bodies usually state their model on the front. For lenses you can enter all the text written around the front lens.",
     "placeholder": "D800, 5D Mark III, 50mm f1.4 AF, SB-900 flash, ..."
   },
-  "image": {
-    "name": "Image",
-    "help": "Submit an image of your product yo."
+  "condition": {
+    "name": "Condition",
+    "help": "What condition is the product in?",
+    "options": {
+      "perfect": "Perfect – The product works without flaws.",
+      "useable": "Good – The product has been used, but works as intended.",
+      "broken": "Broken – The product is mainly for spare parts.",
+      "unknown": "I don't know."
+    }
+  },
+  "images": {
+    "name": "Images",
+    "help": "Add images of your product to help us make a better offer."
+  },
+  "user": {
+    "name": {
+      "name": "Name",
+      "placeholder": "My name is..."
+    },
+    "phone": {
+      "name": "Phone",
+      "placeholder": "My phone number is..."
+    },
+    "email": {
+      "name": "Email",
+      "placeholder": "example@email.com"
+    },
+    "country":  {
+      "name": "Country",
+      "placeholder": "I live in..."
+    }
   }
 }
