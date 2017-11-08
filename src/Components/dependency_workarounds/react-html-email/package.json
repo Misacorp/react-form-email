@@ -1,0 +1,85 @@
+{
+  "_args": [
+    [
+      "react-html-email@3.0.0",
+      "/home/misa/GitHub/react-form-email"
+    ]
+  ],
+  "_from": "react-html-email@3.0.0",
+  "_id": "react-html-email@3.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-eIBmZjqoS1SLAOi/QYTHLnZSmBM5AhP/cScJGhVDHlBJFtMyiR4qBUQYQDCqRtNPDKHWGMbbS/+XHSgD+C2hng==",
+  "_location": "/react-html-email",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-html-email@3.0.0",
+    "name": "react-html-email",
+    "escapedName": "react-html-email",
+    "rawSpec": "3.0.0",
+    "saveSpec": null,
+    "fetchSpec": "3.0.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-html-email/-/react-html-email-3.0.0.tgz",
+  "_spec": "3.0.0",
+  "_where": "/home/misa/GitHub/react-form-email",
+  "author": {
+    "name": "Max Goodman",
+    "email": "c@chromakode.com"
+  },
+  "bugs": {
+    "url": "https://github.com/chromakode/react-html-email/issues"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
+  },
+  "description": "Create elegant HTML email templates using React.",
+  "devDependencies": {
+    "babel-cli": "~6.26.0",
+    "babel-eslint": "~8.0.0",
+    "babel-jest": "^21.0.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "cheerio": "~1.0.0-rc.2",
+    "eslint": "~4.7.2",
+    "eslint-config-airbnb": "~15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.4.0",
+    "jest": "^21.1.0",
+    "node-fetch": "~1.7.3",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "homepage": "https://github.com/chromakode/react-html-email#readme",
+  "keywords": [
+    "react",
+    "html",
+    "email"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "name": "react-html-email",
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chromakode/react-html-email.git"
+  },
+  "scripts": {
+    "compile": "babel -d lib/ src/ && cp -v src/supportMatrix.json lib/",
+    "lint": "eslint --ext .jsx --ext .js .",
+    "prepare": "npm run compile",
+    "scrape": "babel-node scripts/scrapeStyleSupport.js > src/supportMatrix.json",
+    "test": "jest",
+    "test:cov": "jest --coverage"
+  },
+  "version": "3.0.0"
+}

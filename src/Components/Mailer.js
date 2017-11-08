@@ -1,5 +1,9 @@
 import React from 'react';
-import { Span, Email, Box, Item, renderEmail } from 'react-html-email'
+import Span from './dependency_workarounds/react-html-email/lib/components/Span';
+import Email from './dependency_workarounds/react-html-email/lib/components/Email';
+import Item from './dependency_workarounds/react-html-email/lib/components/Item';
+import Box from './dependency_workarounds/react-html-email/lib/components/Box';
+import { renderEmail } from './dependency_workarounds/react-html-email/lib';
 import FetchError from 'fetch-error';
 
 class Mailer {
@@ -39,7 +43,7 @@ class Mailer {
                 { product.files.map(function(file, fileIndex) {
                   return (
                     <Item width="100%" key={fileIndex}>
-                      <img width="100%" src={'cid:' + index + '_' + fileIndex} alt={product.brand + " " + product.model + "(" + (fileIndex + 1) + " of " + product.files.length} />
+                      <img width="100%" src={"cid:" + index + "_" + fileIndex} alt={product.brand + " " + product.model + " (" + (fileIndex + 1) + " of " + product.files.length + ")"} />
                     </Item>
                   )
                 })}
