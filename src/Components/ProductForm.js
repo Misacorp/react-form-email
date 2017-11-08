@@ -4,6 +4,11 @@ import FieldGroup from './FieldGroup';
 import FileBase64 from 'react-file-base64';
 
 class ProductForm extends Component {
+
+  handleOptionChange() {
+    this.props.handleChange.bind(this);
+  }
+
   render() {
     const translations = this.props.translations;
 
@@ -47,16 +52,32 @@ class ProductForm extends Component {
             <HelpBlock>{ translations.condition.help } </HelpBlock>
 
             <FormGroup>
-              <Radio name="condition">
+              <Radio
+                value="perfect"
+                onChange={ this.props.handleOptionChange.bind(this)}
+                checked={this.props.productData.condition === 'perfect'}
+              >
                 { translations.condition.options.perfect }
               </Radio>
-              <Radio name="condition">
-                { translations.condition.options.useable }
+              <Radio
+                value="good"
+                onChange={ this.props.handleOptionChange.bind(this)}
+                checked={this.props.productData.condition === 'good'}
+              >
+                { translations.condition.options.good }
               </Radio>
-              <Radio name="condition">
+              <Radio
+                value="broken"
+                onChange={ this.props.handleOptionChange.bind(this)}
+                checked={this.props.productData.condition === 'broken'}
+              >
                 { translations.condition.options.broken }
               </Radio>
-              <Radio name="condition">
+              <Radio
+                value="unknown"
+                onChange={ this.props.handleOptionChange.bind(this)}
+                checked={this.props.productData.condition === 'unknown'}
+              >
                 { translations.condition.options.unknown }
               </Radio>
             </FormGroup>

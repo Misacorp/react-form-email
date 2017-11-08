@@ -59,16 +59,33 @@ class App extends Component {
     const newProduct = this.state.products[index];
     newProduct.setProperty(event.target.id, event.target.value);
 
+    // Update state with new product
+    this.updateProduct(index, newProduct);
+  }
+
+
+  // Handles radio button changes
+  handleOptionChange(index, event) {
+    const newProduct = this.state.products[index];
+    newProduct.condition = event.target.value;
+
+    // Update state with new product
+    this.updateProduct(index, newProduct);
+  }
+
+
+  // Replaces the this.state.product[index] with @item
+  updateProduct(index, item) {
     // Add item to a copy of the current state
     const products = this.state.products;
-    products[index] = newProduct;
+    products[index] = item;
 
     // Update state with the copy
     this.setState({
       products
     });
 
-
+    console.log("Updated products:", this.state.products[index]);
   }
 
 
@@ -78,8 +95,7 @@ class App extends Component {
 
     this.setState({
       userData: user
-    })
-    console.log(this.state.userData);
+    });
   }
 
 
@@ -117,7 +133,7 @@ class App extends Component {
     console.log("Sending email. Content: ", email);
 
     // Send mail
-    mailer.sendMail(email);
+    // mailer.sendMail(email);
   }
 
 
@@ -159,6 +175,7 @@ class App extends Component {
                 translations={this.state.translations}
                 products={this.state.products}
                 handleChange={this.handleProductChange.bind(this)}
+                handleOptionChange={this.handleOptionChange.bind(this)}
                 getFiles={this.getFiles.bind(this)}
               />
 

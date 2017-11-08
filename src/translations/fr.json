@@ -1,51 +1,51 @@
 {
-  "language": "French",
-  "general": {
-    "title": "(FR) Sell to Us",
-    "newProduct": "(FR) New Product",
-    "product": "(FR) Product",
-    "submit": "(FR) Submit"
+  "language":"French",
+  "general":{
+    "title":"Vendez-nous",
+    "newProduct":"Nouveau Produit",
+    "product":"Produit",
+    "submit":"Envoyer"
   },
-  "brand": {
-    "name": "(FR) Brand",
-    "help": "(FR) The brand is the product's manufacturer, whose name can usually be found on the front of the camera or lens.",
-    "placeholder": "(FR) Nikon, Canon, Leica, ..."
+  "brand":{
+    "name":"Marque",
+    "help":"La marque correspond au fabricant du produit, son nom est généralement visible sur l'avant du boitier ou de l'objectif.",
+    "placeholder":"Nikon, Canon, Leica, ..."
   },
-  "model": {
-    "name": "(FR) Model",
-    "help": "(FR) Camera bodies usually state their model on the front. For lenses you can enter all the text written around the front lens.",
-    "placeholder": "(FR) D800, 5D Mark III, 50mm f1.4 AF, SB-900 flash, ..."
+  "model":{
+    "name":"Modèle",
+    "help":"Le modèle est généralement affiché sur le devant de l'appreil. Pour les objectifs, vous pouvez indiquer toutes les informations inscrites sur la lentille frontale.",
+    "placeholder":"D800, 5D Mark III, 50mm f1.4 AF, SB-900 flash, ..."
   },
-  "condition": {
-    "name": "(FR) Condition",
-    "help": "(FR) What condition is the product in?",
-    "options": {
-      "perfect": "(FR) Perfect – The product works without flaws.",
-      "useable": "(FR) Good – The product has been used, but works as intended.",
-      "broken": "(FR) Broken – The product is mainly for spare parts.",
-      "unknown": "(FR) I don't know."
+  "condition":{
+    "name":"Condition",
+    "help":"Quel est l'état du produit?",
+    "options":{
+      "perfect":"Parfait – Le produit fonctionne sans souci.",
+      "good":"Bon – Le produit a été utilisé, mais fonctionne normalement.",
+      "broken":"Hors Service – Pour pièces détachées.",
+      "unknown":"Je ne sais pas."
     }
   },
-  "images": {
-    "name": "(FR) Images",
-    "help": "(FR) Add images of your product to help us make a better offer."
+  "images":{
+    "name":"Photos",
+    "help":"Ajoutez des photos de votre article pour nous aider à vous donner une meilleure estimation."
   },
-  "user": {
-    "name": {
-      "name": "(FR) Name",
-      "placeholder": "(FR) My name is..."
+  "user":{
+    "name":{
+      "name":"Nom",
+      "placeholder":"Mon nom est..."
     },
-    "phone": {
-      "name": "(FR) Phone",
-      "placeholder": "(FR) My phone number is..."
+    "phone":{
+      "name":"Téléphone",
+      "placeholder":"Mon numéro de téléphone est..."
     },
-    "email": {
-      "name": "(FR) Email",
-      "placeholder": "(FR) example@email.com"
+    "email":{
+      "name":"Email",
+      "placeholder":"exemple@email.com"
     },
-    "country":  {
-      "name": "(FR) Country",
-      "placeholder": "(FR) I live in..."
+    "country":{
+      "name":"Pays",
+      "placeholder":"Je suis en..."
     }
   }
 }

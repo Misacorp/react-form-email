@@ -39,6 +39,10 @@ class Mailer {
                 <Item>
                   <Span style={styles.property}>Model:</Span> { product.model }
                 </Item>
+                <Item>
+                  <Span style={styles.propert}>Condition:</Span> { product.condition }
+                </Item>
+
 
                 { product.files.map(function(file, fileIndex) {
                   return (

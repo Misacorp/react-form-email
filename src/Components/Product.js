@@ -1,7 +1,8 @@
 class Product {
-  constructor(brand, model) {
+  constructor(brand, model, condition) {
     this.brand = brand || '';
     this.model = model || '';
+    this.condition = condition || 'unknown';
     this.files = [];
   }
   
@@ -12,7 +13,6 @@ class Product {
 
   setFiles(fileArray) {
     this.files = fileArray;
-    console.log("New files:", this.files);
   }
 }
 

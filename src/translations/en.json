@@ -21,7 +21,7 @@
     "help": "What condition is the product in?",
     "options": {
       "perfect": "Perfect – The product works without flaws.",
-      "useable": "Good – The product has been used, but works as intended.",
+      "good": "Good – The product has been used, but works as intended.",
       "broken": "Broken – The product is mainly for spare parts.",
       "unknown": "I don't know."
     }

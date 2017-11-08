@@ -21,8 +21,9 @@ class ProductFormContainer extends Component {
             <Panel>
               <ProductForm
                 translations={ this.props.translations }
-                productData={ this.props.products[index] }
+                productData={ products[index] }
                 handleChange={ (e) => { this.props.handleChange(index, e) }}
+                handleOptionChange={ (e) => {this.props.handleOptionChange(index, e) }}
                 getFiles={ (e) => { this.props.getFiles(index, e) }}
               />
             </Panel>
