@@ -16,6 +16,11 @@ class Product {
   getFiles() {
     return this.files;
   }
+
+  setProperty(property, value) {
+    this[property] = value;
+    return this;
+  }
 }
 
 export default Product;

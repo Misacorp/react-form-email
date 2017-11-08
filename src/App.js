@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Panel, Button } from 'react-bootstrap';
+import { Row, Button } from 'react-bootstrap';
 import './App.css';
 import Product from './Components/Product';
 import ProductFormContainer from './Components/ProductFormContainer';
@@ -50,6 +50,22 @@ class App extends Component {
   }
 
 
+  // Handles input value changes. @index is the product's index in this.state.products
+  handleChange(index, event) {
+    // Updated product item
+    const newProduct = this.state.products[index].setProperty(event.target.id, event.target.value);
+    // Add item to a copy of the current state
+    const products = this.state.products;
+    products[index] = newProduct;
+    // Update state with the copy
+    this.setState({
+      products
+    });
+
+
+  }
+
+
 
   handleSubmit(e) {
     e.preventDefault();
@@ -57,7 +73,7 @@ class App extends Component {
     // Construct object that is to be submitted
     const formData = this.state;
     // Add language to form data
-    formData.language = this.props.translations.language;
+    formData.language = this.state.translations.language;
     console.log(formData);
 
     // Create and send email
@@ -98,27 +114,29 @@ class App extends Component {
     // Change the button event handlers: https://stackoverflow.com/questions/29810914/react-js-onclick-cant-pass-value-to-method
     return (
       <div className="AppPage">
-        <Button onClick={() => this.changeLanguage(en)} className="button--language">{en.language}</Button>
-        <Button onClick={() => this.changeLanguage(fr)} className="button--language">{fr.language}</Button>
-        <form onSubmit={this.handleSubmit}>
+        <Row>
+          <Button onClick={() => this.changeLanguage(en)} className="button--language">{en.language}</Button>
+          <Button onClick={() => this.changeLanguage(fr)} className="button--language">{fr.language}</Button>
+        </Row>
 
-          <ProductFormContainer
-            translations={this.state.translations}
-            products={this.state.products}
-            handleChangeFor={this.handleChangeFor}
-          />
+        <Row>
+          <form onSubmit={this.handleSubmit}>
+            <ProductFormContainer
+              translations={this.state.translations}
+              products={this.state.products}
+              handleChange={this.handleChange.bind(this)}
+            />
+            <Row>
+              <Button onClick={this.createProductForm.bind(this)} >
+                New Product
+              </Button>
+            </Row>
 
-          <Row>
-            <Button onClick={this.createProductForm.bind(this)} >
-              New Product
-            </Button>
-          </Row>
-
-          <Row>
-            <Button type="submit" bsSize="large" bsStyle="primary">Submit</Button>
-          </Row>
-
-        </form>
+            <Row>
+              <Button type="submit" bsSize="large" bsStyle="primary">Submit</Button>
+            </Row>
+          </form>
+        </Row>
       </div>
     );
   }

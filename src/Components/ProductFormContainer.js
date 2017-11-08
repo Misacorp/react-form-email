@@ -9,17 +9,15 @@ class ProductFormContainer extends Component {
   render() {
     const products = this.props.products;
 
-    console.log(this.props.products);
-
     return(
       <div>
         {products.map((product, index) => 
-          <div>
+          <div key={index}>
             <Panel>
               <ProductForm
-                translations={this.props.translations}
-                productData={this.props.products[index]}
-                handleChangeFor={this.props.handleChangeFor}
+                translations={ this.props.translations }
+                productData={ this.props.products[index] }
+                handleChange={ (e) => { this.props.handleChange(index, e) }}
               />
             </Panel>
           </div>

@@ -29,7 +29,7 @@ class ProductForm extends Component {
             placeholder={translations.brand.placeholder}
             help={translations.brand.help}
             value={this.props.productData.brand}
-            onChange={this.props.handleChangeFor('brand')}
+            onChange={ this.props.handleChange.bind(this) }
           />
 
           <FieldGroup
@@ -39,7 +39,7 @@ class ProductForm extends Component {
             placeholder={translations.model.placeholder}
             help={translations.model.help}
             value={this.props.productData.model}
-            onChange={this.props.handleChangeFor('model')}
+            onChange={ this.props.handleChange.bind(this) }
           />
 
           <FileBase64
