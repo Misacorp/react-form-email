@@ -1,18 +1,41 @@
 import React from 'react';
-import { Email, Box, Item, renderEmail } from 'react-html-email'
+import { Span, Email, Box, Item, renderEmail } from 'react-html-email'
 import FetchError from 'fetch-error';
 
 class Mailer {
 
   // Rewrite this
-  buildEmail() {
+  buildEmail(state) {
+
+    const styles = {
+      property: {
+        color: '#777',
+        fontWeight: 'bold',
+      }
+    }
+
     const emailHTML = renderEmail(
-      <Email title="Hello World!">
-        <Box>
-          <Item>Language: {this.props.translations.language}</Item>
-          <Item>Brand: {this.props.productData.brand}</Item>
-          <Item>Model: {this.props.productData.model}</Item>
-        </Box>
+      <Email title="Hello World!" cellSpacing={5}>
+        <Item>
+          <Span fontSize={30} fontWeight={'bold'}>New Offer</Span>
+        </Item>
+
+        <Item>
+          <Span>Language: {state.translations.language}</Span>
+        </Item>
+
+        { state.products.map((product, index) => 
+          <Item key={index}>
+            <Box cellPadding={5} width="100%" style={{ border: '1px solid #AAA', marginTop: '5px' }}>
+              <Item>
+                <Span style={styles.property}>Brand:</Span> { product.brand }
+              </Item>
+              <Item>
+                <Span style={styles.property}>Model:</Span> { product.model }
+              </Item>
+            </Box>
+          </Item>
+        )}
       </Email>
     );
 

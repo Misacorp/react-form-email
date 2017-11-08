@@ -76,16 +76,19 @@ class App extends Component {
     formData.language = this.state.translations.language;
     console.log(formData);
 
-    // Create and send email
+    // Create a Mailer to build and send emails
+    const mailer = new Mailer();
+
+    // Build email
     const email = {
-      html: this.buildEmail(),
-      attachments: this.state.files
-    }
+      html: mailer.buildEmail(this.state),
+      attachments: []
+    };
 
     console.log("Sending email. Content: ");
     console.log(email);
 
-    const mailer = new Mailer();
+    // Send mail
     mailer.sendMail(email);
   }
 

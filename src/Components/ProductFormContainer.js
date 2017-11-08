@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Panel } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import ProductForm from './ProductForm';
 
 class ProductFormContainer extends Component {
