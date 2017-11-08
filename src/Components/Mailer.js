@@ -25,24 +25,28 @@ class Mailer {
           <Span>Language: {state.translations.language}</Span>
         </Item>
 
-        { state.products.map((product, index) => 
-          <Item key={index}>
-            <Box cellPadding={5} width="100%" style={{ border: '1px solid #AAA', marginTop: '5px' }}>
-              <Item>
-                <Span style={styles.property}>Brand:</Span> { product.brand }
-              </Item>
-              <Item>
-                <Span style={styles.property}>Model:</Span> { product.model }
-              </Item>
-
-              { product.files.map((file, fileIndex) => 
-                <Item width="100%" key={fileIndex}>
-                  <img width="100%" src={`cid:${index}_${fileIndex}`} alt={`${product.brand} ${product.model} (${fileIndex + 1} of ${product.files.length})`} />
+        { state.products.map(function(product, index) {
+          return ( 
+            <Item key={index}>
+              <Box cellPadding={5} width="100%" style={{ border: '1px solid #AAA', marginTop: '5px' }}>
+                <Item>
+                  <Span style={styles.property}>Brand:</Span> { product.brand }
                 </Item>
-              )}
-            </Box>
-          </Item>
-        )}
+                <Item>
+                  <Span style={styles.property}>Model:</Span> { product.model }
+                </Item>
+
+                { product.files.map(function(file, fileIndex) {
+                  return (
+                    <Item width="100%" key={fileIndex}>
+                      <img width="100%" src={'cid:' + index + '_' + fileIndex} alt={product.brand + " " + product.model + "(" + (fileIndex + 1) + " of " + product.files.length} />
+                    </Item>
+                  )
+                })}
+              </Box>
+            </Item>
+          )
+        })}
       </Email>
     );
 
