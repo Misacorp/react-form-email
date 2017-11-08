@@ -6,20 +6,19 @@ var nodemailer = require('nodemailer');
 // Sends email
 function sendMail(email, cb) {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
+    service: 'gmail',
     auth: {
-      user: 'uhirv4w67srm6mku@ethereal.email',
-      pass: 'gmF77RxUfrMTPuHdXK'
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASSWORD
     }
   });
 
   console.log("Sending mail");
   
   const mailOptions = {
-    from: "react-form-email@test.service",
-    to: "uhirv4w67srm6mku@ethereal.email",
-    subject: "Testi",
+    from: process.env.GMAIL_USER,
+    to: process.env.EMAIL_RECIPIENT,
+    subject: "Offer Request",
     html: email.html,
     attachments: email.attachments
   }

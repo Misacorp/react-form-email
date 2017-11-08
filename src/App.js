@@ -40,9 +40,6 @@ class App extends Component {
 
   // Handle changing of input values for a given property
   handleChangeFor = (propertyName) => (event) => {
-    console.log(this);
-
-
     const { currentState } = this.state;
     // Create an updated version of this state
     const newState = {
@@ -110,7 +107,6 @@ class App extends Component {
     const formData = this.state;
     // Add language to form data
     formData.language = this.state.translations.language;
-    console.log(formData);
 
     // Create a Mailer to build and send emails
     const mailer = new Mailer();
@@ -118,10 +114,7 @@ class App extends Component {
     // Build email
     const email = mailer.buildEmail(this.state);
 
-    console.log("Sending email. Content: ");
-    console.log(email);
-
-    console.log(email[0], email[1]);
+    console.log("Sending email. Content: ", email);
 
     // Send mail
     mailer.sendMail(email);
