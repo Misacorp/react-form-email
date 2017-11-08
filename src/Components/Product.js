@@ -21,6 +21,11 @@ class Product {
     this[property] = value;
     return this;
   }
+
+  setFiles(fileArray) {
+    this.files = fileArray;
+    console.log("New files:", this.files);
+  }
 }
 
 export default Product;

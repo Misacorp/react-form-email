@@ -3,20 +3,6 @@ import FieldGroup from './FieldGroup';
 import FileBase64 from 'react-file-base64';
 
 class ProductForm extends Component {
-
-  getFiles(files) {
-    this.setState({
-      files: [
-        ...this.props.productData.files,
-        ...files
-      ]
-    });
-
-    console.log(this.props.productData.files);
-  }
-
-
-
   render() {
     const translations = this.props.translations;
 
@@ -44,7 +30,7 @@ class ProductForm extends Component {
 
           <FileBase64
             multiple={ true }
-            onDone={ this.getFiles.bind(this) }
+            onDone={ this.props.getFiles.bind(this) }
           />
       </div>
     );

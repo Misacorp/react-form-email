@@ -14,7 +14,8 @@ class Mailer {
       }
     }
 
-    const emailHTML = renderEmail(
+    // Build email HTML
+    const html = renderEmail(
       <Email title="Hello World!" cellSpacing={5}>
         <Item>
           <Span fontSize={30} fontWeight={'bold'}>New Offer</Span>
@@ -33,13 +34,32 @@ class Mailer {
               <Item>
                 <Span style={styles.property}>Model:</Span> { product.model }
               </Item>
+
+              { product.files.map((file, fileIndex) => 
+                <Item width="100%" key={fileIndex}>
+                  <img width="100%" src={`cid:${index}_${fileIndex}`} />
+                </Item>
+              )}
             </Box>
           </Item>
         )}
       </Email>
     );
 
-    return emailHTML;
+    // Attach file identifiers to attachments. This allows us to display them inline
+    let attachments = [];
+    // Loop through products
+    for(let i = 0; i < state.products.length; i++) {
+      let product = state.products[i];
+      // Loop through each product's files
+      for(let j = 0; j < product.files.length; j++) {
+        let file = product.files[j];
+        file['cid'] = i + '_' + j;      // Format is '{product_index}_{file_index}' eg. '0_2' for the first product's 3rd file
+        attachments.push(file);
+      }
+    }
+
+    return { html, attachments };
   }
 
 

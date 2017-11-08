@@ -53,10 +53,13 @@ class App extends Component {
   // Handles input value changes. @index is the product's index in this.state.products
   handleChange(index, event) {
     // Updated product item
-    const newProduct = this.state.products[index].setProperty(event.target.id, event.target.value);
+    const newProduct = this.state.products[index];
+    newProduct.setProperty(event.target.id, event.target.value);
+
     // Add item to a copy of the current state
     const products = this.state.products;
     products[index] = newProduct;
+
     // Update state with the copy
     this.setState({
       products
@@ -65,6 +68,22 @@ class App extends Component {
 
   }
 
+
+  getFiles(index, files) {
+    // Copy the Product being changed
+    const newProduct = this.state.products[index];
+    // Replace Product's files with @files
+    newProduct.setFiles(files);
+
+    // Add the new product to a copy of the current state
+    const products = this.state.products;
+    products[index] = newProduct;
+
+    // Update state with the copy
+    this.setState({
+      products
+    })
+  }
 
 
   handleSubmit(e) {
@@ -80,13 +99,12 @@ class App extends Component {
     const mailer = new Mailer();
 
     // Build email
-    const email = {
-      html: mailer.buildEmail(this.state),
-      attachments: []
-    };
+    const email = mailer.buildEmail(this.state);
 
     console.log("Sending email. Content: ");
     console.log(email);
+
+    console.log(email[0], email[1]);
 
     // Send mail
     mailer.sendMail(email);
@@ -128,6 +146,7 @@ class App extends Component {
               translations={this.state.translations}
               products={this.state.products}
               handleChange={this.handleChange.bind(this)}
+              getFiles={this.getFiles.bind(this)}
             />
             <Row>
               <Button onClick={this.createProductForm.bind(this)} >

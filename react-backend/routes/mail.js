@@ -24,6 +24,7 @@ function sendMail(email, cb) {
     attachments: email.attachments
   }
 
+  // Debug
   console.log("Attachments:");
   for(let i = 0; i < email.attachments.length; i++) {
     console.log("Filename: " + email.attachments[i].filename);
@@ -54,7 +55,8 @@ router.post('/', function(req, res, next) {
       filename: `product-${i}.${extension}`,
       content: encodedImage,
       encoding: 'base64',
-      contentType: mailAttachments[i].type
+      contentType: mailAttachments[i].type,
+      cid: mailAttachments[i].cid
     }
     // Push image object to attachments array
     attachments.push(imageObject);

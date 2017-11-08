@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Panel } from 'react-bootstrap';
 import ProductForm from './ProductForm';
 
+// Takes in an array of Product objects
+// Renders a ProductForm for each object
 class ProductFormContainer extends Component {
-  // Takes in an array of Product objects
-  // Renders a ProductForm for each object
-
   render() {
     const products = this.props.products;
 
@@ -18,6 +17,7 @@ class ProductFormContainer extends Component {
                 translations={ this.props.translations }
                 productData={ this.props.products[index] }
                 handleChange={ (e) => { this.props.handleChange(index, e) }}
+                getFiles={ (e) => { this.props.getFiles(index, e) }}
               />
             </Panel>
           </div>
