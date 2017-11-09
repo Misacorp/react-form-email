@@ -5,6 +5,7 @@ import Product from './Components/Product';
 import ProductFormContainer from './Components/ProductFormContainer';
 import Mailer from './Components/Mailer';
 import UserForm from './Components/UserForm';
+import Banner from './Components/Banner';
 
 // Translations
 import en from './translations/en.json';
@@ -238,67 +239,70 @@ class App extends Component {
   render() {
     // Change the button event handlers: https://stackoverflow.com/questions/29810914/react-js-onclick-cant-pass-value-to-method
     return (
-      <div className="AppPage">
-        <Row>
-          <Col xs={12}>
-            <Button
-              onClick={() => this.changeLanguage(en)}
-              className="button--language"
-              active={this.state.translations === en}>
-              {en.language}
-            </Button>
-            <Button
-              onClick={() => this.changeLanguage(fr)}
-              className="button--language"
-              active={this.state.translations === fr}>
-              {fr.language}
-            </Button>
-          </Col>
-        </Row>
-
-        <form onSubmit={this.handleSubmit}>
+      <div>
+        <Banner />
+        <div className="AppPage">
           <Row>
-            <Col xs={12}>
-              <ProductFormContainer
-                translations={this.state.translations}
-                products={this.state.products}
-                handleChange={this.handleProductChange.bind(this)}
-                handleOptionChange={this.handleOptionChange.bind(this)}
-                getFiles={this.getFiles.bind(this)}
-                createProductForm={this.createProductForm.bind(this)}
-              />
+            <Col xs={12} className="center">
+              <Button
+                onClick={() => this.changeLanguage(en)}
+                className="button--language"
+                active={this.state.translations === en}>
+                {en.language}
+              </Button>
+              <Button
+                onClick={() => this.changeLanguage(fr)}
+                className="button--language"
+                active={this.state.translations === fr}>
+                {fr.language}
+              </Button>
             </Col>
           </Row>
 
-          <Row>
-            <Col xs={12}>
-              <Panel
-                header={<h2>{ this.state.translations.user.contactInformation }</h2>}
-                bsStyle={ this.getSubmitStatus().style }>
-                
-                <UserForm
-                  translations={ this.state.translations.user }
-                  userData={ this.state.userData }
-                  handleChange={this.handleUserChange.bind(this)}
+          <form onSubmit={this.handleSubmit}>
+            <Row>
+              <Col xs={12}>
+                <ProductFormContainer
+                  translations={this.state.translations}
+                  products={this.state.products}
+                  handleChange={this.handleProductChange.bind(this)}
+                  handleOptionChange={this.handleOptionChange.bind(this)}
+                  getFiles={this.getFiles.bind(this)}
+                  createProductForm={this.createProductForm.bind(this)}
                 />
+              </Col>
+            </Row>
 
-                <Row>
-                  <Col xs={12}>
-                    <Button
-                      type="submit"
-                      bsSize="large"
-                      className="center button--submit"
-                      bsStyle={ this.getSubmitStatus().style }
-                      disabled={!this.canSubmit(this.state)}
-                    >
-                      { this.getSubmitStatus().status }
-                    </Button>
-                  </Col>
-                </Row>
-              </Panel>
-            </Col>
-          </Row>
-        </form>
+            <Row>
+              <Col xs={12}>
+                <Panel
+                  header={<h2>{ this.state.translations.user.contactInformation }</h2>}
+                  bsStyle={ this.getSubmitStatus().style }>
+                  
+                  <UserForm
+                    translations={ this.state.translations.user }
+                    userData={ this.state.userData }
+                    handleChange={this.handleUserChange.bind(this)}
+                  />
+
+                  <Row>
+                    <Col xs={12}>
+                      <Button
+                        type="submit"
+                        bsSize="large"
+                        className="center button--submit"
+                        bsStyle={ this.getSubmitStatus().style }
+                        disabled={!this.canSubmit(this.state)}
+                      >
+                        { this.getSubmitStatus().status }
+                      </Button>
+                    </Col>
+                  </Row>
+                </Panel>
+              </Col>
+            </Row>
+          </form>
+        </div>
       </div>
     );
   }

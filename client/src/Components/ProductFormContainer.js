@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PageHeader, Button, Col, Row, Panel } from 'react-bootstrap';
+import { Image, PageHeader, Button, Col, Row, Panel } from 'react-bootstrap';
 import ProductForm from './ProductForm';
 
 // Takes in an array of Product objects
@@ -15,8 +15,8 @@ class ProductFormContainer extends Component {
     return(
       <div>
         <Row>
-          <Col xs={12}>
-            <PageHeader>{ this.props.translations.general.title }</PageHeader>
+          <Col xs={8}>
+            <h1>{ this.props.translations.general.title }</h1>
           </Col>
         </Row>
 
