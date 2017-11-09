@@ -20,7 +20,7 @@ function sendMail(email, cb) {
     html: email.html,
     attachments: email.attachments,
     headers: {
-      'Reply-To': 'custom@reply-to.address'
+      'Reply-To': email.meta.replyto
     }
   }
 
@@ -41,6 +41,7 @@ function sendMail(email, cb) {
 router.post('/', function(req, res, next) {
   let mailHTML = req.body.html;
   let mailAttachments = req.body.attachments;
+  let meta = req.body.meta;
 
   // Attachments contains Base64 encoded image data. Build an object:
   let attachments = [];
@@ -65,7 +66,8 @@ router.post('/', function(req, res, next) {
   // Construct email object with two parts: HTML and attachments
   let email = {
     html: mailHTML,
-    attachments: attachments
+    attachments: attachments,
+    meta: meta
   }
 
   // Send email and handle result

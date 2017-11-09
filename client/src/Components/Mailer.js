@@ -28,6 +28,18 @@ class Mailer {
         <Item>
           <Span>Language: {state.translations.language}</Span>
         </Item>
+        <Item>
+          <Span>Name: {state.userData.name}</Span>
+        </Item>
+        <Item>
+          <Span>Phone: {state.userData.phone}</Span>
+        </Item>
+        <Item>
+          <Span>Email: {state.userData.email}</Span>
+        </Item>
+        <Item>
+          <Span>Country: {state.userData.country}</Span>
+        </Item>
 
         { state.products.map(function(product, index) {
           return ( 
@@ -71,7 +83,11 @@ class Mailer {
       }
     }
 
-    return { html, attachments };
+    let meta = {
+      replyto: state.userData.email
+    }
+
+    return { html, attachments, meta };
   }
 
 
