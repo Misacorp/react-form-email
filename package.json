@@ -8,7 +8,8 @@
     "start": "concurrently \"cd client && PORT=3000 npm start\" \"cd server && PORT=3001 npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "concurrently \"cd client && npm build\" \"cd server && npm build\"",
-    "start:prod": "cd server && npm start:prod"
+    "start:prod": "cd server && npm start:prod",
+    "heroku-postbuild": "npm build"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
   "homepage": "https://github.com/Misacorp/react-form-email#readme",
   "dependencies": {
     "concurrently": "^3.5.0"
+  },
+  "engines": {
+    "node": "9.0.0"
   }
 }
