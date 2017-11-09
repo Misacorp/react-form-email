@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon -r babel-register bin/www",
+    "start": "nodemon -r babel-register app.js",
     "build": "babel . --ignore node_modules,build --out-dir build",
-    "start:prod": "node build/bin/www"
+    "start:prod": "node build/app.js"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",

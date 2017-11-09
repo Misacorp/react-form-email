@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install": "(cd client && npm) && (cd server && npm)",
+    "install": "(cd client && npm install) && (cd server && npm install)",
     "start": "concurrently \"cd client && PORT=3000 npm start\" \"cd server && PORT=3001 npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "concurrently \"cd client && npm build\" \"cd server && npm build\"",
-    "start:prod": "cd server && npm start:prod",
-    "heroku-postbuild": "npm build"
+    "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
+    "start:prod": "cd server && npm run start:prod",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
