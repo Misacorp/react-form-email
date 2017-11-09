@@ -31,6 +31,7 @@ function sendMail(email, cb) {
   }
 
   transporter.sendMail(mailOptions, (err, info) => {
+    console.log("mailOptions", mailOptions);
     cb(err, info)
   });
 }
@@ -71,7 +72,7 @@ router.post('/', function(req, res, next) {
   // Send email and handle result
   sendMail(email, (error, response) => {
     if(error) {
-      console.log("Mail error!");
+      console.log("Mail error!", error);
       res.status(500);
       res.send( error );
     }
