@@ -1,9 +1,11 @@
 class Product {
-  constructor(brand, model, condition) {
+  constructor(brand, model, condition, files) {
     this.brand = brand || '';
     this.model = model || '';
     this.condition = condition || 'unknown';
-    this.files = [];
+    this.files = files && files.constructor === Array ? files : [];
+
+    console.log(this.files);
   }
   
   setProperty(property, value) {

@@ -28,28 +28,27 @@ class App extends Component {
       }
     }
 
-    this.handleChangeFor = this.handleChangeFor.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  changeLanguage(lang) {
-    this.setState({ translations: lang });
-    console.log(`Current language: ${this.state.translations.language}`);
+
+  resetForm() {
+    this.setState({
+      products: [
+        new Product(),
+      ],
+      userData: {
+        name: '',
+        phone: '',
+        email: '',
+        country: ''
+      }
+    })
   }
 
 
-  // Handle changing of input values for a given property
-  handleChangeFor = (propertyName) => (event) => {
-    const { currentState } = this.state;
-    // Create an updated version of this state
-    const newState = {
-      // Everything already in state
-      ...currentState,
-      // Changed property
-      [propertyName]: event.target.value
-    };
-    // Replace state with updated one
-    this.setState(newState);
+  changeLanguage(lang) {
+    this.setState({ translations: lang });
   }
 
 
@@ -84,8 +83,6 @@ class App extends Component {
     this.setState({
       products
     });
-
-    console.log("Updated products:", this.state.products[index]);
   }
 
 
@@ -116,6 +113,7 @@ class App extends Component {
   }
 
 
+  // Handles form submission. Displays submission results.
   handleSubmit(e) {
     e.preventDefault();
 
@@ -130,10 +128,34 @@ class App extends Component {
     // Build email
     const email = mailer.buildEmail(this.state);
 
-    console.log("Sending email. Content: ", email);
+    // Send mail and handle result in a callback function.
+    mailer.sendMail(email, (response) => {
+      // Mail sent successfully
+      if(response.result == 'success') {
+        this.resetForm();
+      }
+      // Mail could not be sent
+      else if(response.result == 'error') {
+        console.log("Mail could not be sent.", response);
+      }
+      // Unknown error
+      else {
+        console.log("Unknown error when sending mail.");
+      }
+    });
+  }
 
-    // Send mail
-    // mailer.sendMail(email);
+
+  // Enables and disables submit button
+  canSubmit(state) {
+    function userDataComplete(state) {
+      const u = state.userData;
+      if(u.name && u.phone && u.email && u.country)
+        return true;
+      else
+        return false;
+    }
+    return userDataComplete(state);
   }
 
 
@@ -163,51 +185,64 @@ class App extends Component {
       <div className="AppPage">
         <Row>
           <Col xs={12}>
-            <Button onClick={() => this.changeLanguage(en)} className="button--language">{en.language}</Button>
-            <Button onClick={() => this.changeLanguage(fr)} className="button--language">{fr.language}</Button>
+            <Button
+              onClick={() => this.changeLanguage(en)}
+              className="button--language"
+              active={this.state.translations === en}>
+              {en.language}
+            </Button>
+            <Button
+              onClick={() => this.changeLanguage(fr)}
+              className="button--language"
+              active={this.state.translations === fr}>
+              {fr.language}
+            </Button>
           </Col>
         </Row>
 
-        <Row>
-          <Col xs={12}>
-            <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
+          <Row>
+            <Col xs={12}>
               <ProductFormContainer
                 translations={this.state.translations}
                 products={this.state.products}
                 handleChange={this.handleProductChange.bind(this)}
                 handleOptionChange={this.handleOptionChange.bind(this)}
                 getFiles={this.getFiles.bind(this)}
+                createProductForm={this.createProductForm.bind(this)}
               />
+            </Col>
+          </Row>
 
-              <Row>
-                <Col xs={6}>
-                  <Button onClick={this.createProductForm.bind(this)} >
-                    { this.state.translations.general.newProduct }
-                  </Button>
-                </Col>
-              </Row>
+          <Row>
+            <Col xs={12}>
+              <Panel
+                header={<h2>{ this.state.translations.user.contactInformation }</h2>}
+                bsStyle="success">
+                
+                <UserForm
+                  translations={ this.state.translations.user }
+                  userData={ this.state.userData }
+                  handleChange={this.handleUserChange.bind(this)}
+                />
 
-              <Row>
-                <Col xs={12}>
-                  <Panel>
-                    <h2>Contact Information</h2>
-                    <UserForm
-                      translations={ this.state.translations.user }
-                      userData={ this.state.userData }
-                      handleChange={this.handleUserChange.bind(this)}
-                    />
-                  </Panel>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col xs={6}>
-                  <Button type="submit" bsSize="large" bsStyle="primary">{ this.state.translations.general.submit }</Button>
-                </Col>
-              </Row>
-            </form>
-          </Col>
-        </Row>
+                <Row>
+                  <Col xs={12}>
+                    <Button
+                      type="submit"
+                      bsSize="large"
+                      className="center button--submit"
+                      bsStyle="success"
+                      disabled={!this.canSubmit(this.state)}
+                    >
+                      { this.state.translations.general.submit }
+                    </Button>
+                  </Col>
+                </Row>
+              </Panel>
+            </Col>
+          </Row>
+        </form>
       </div>
     );
   }

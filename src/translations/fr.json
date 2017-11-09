@@ -31,6 +31,7 @@
     "help":"Ajoutez des photos de votre article pour nous aider à vous donner une meilleure estimation."
   },
   "user":{
+    "contactInformation": "(FR) Contact Information",
     "name":{
       "name":"Nom",
       "placeholder":"Mon nom est..."

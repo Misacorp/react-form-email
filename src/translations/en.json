@@ -31,6 +31,7 @@
     "help": "Add images of your product to help us make a better offer."
   },
   "user": {
+    "contactInformation": "Contact Information",
     "name": {
       "name": "Name",
       "placeholder": "My name is..."

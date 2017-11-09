@@ -76,7 +76,7 @@ class Mailer {
 
 
   // Send form data to back end form handler.
-  sendMail(data) {
+  sendMail(data, cb) {
     // Send email to backend
     fetch('/mail', {
       method: 'POST',
@@ -89,16 +89,26 @@ class Mailer {
     .then(this.errorify)
     .then((response) => {
       if(response) {
-        response.json();
-      }
-      else {
-        return {
-          status: "error"
+        if(response.status == 200) {
+          cb({
+            result: "success"
+          });
+        }
+        else {
+          cb({
+            result: "error",
+            status: response.status,
+            statusText: response.statusText
+          });
         }
       }
-    })
-    .then((j) => {
-      console.log(j);
+      else {
+        cb({
+          result: "error",
+          status: "no-response",
+          statusText: "Did not receive response from mail server."
+        });
+      }
     });
   }
 

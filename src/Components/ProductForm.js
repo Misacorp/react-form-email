@@ -15,12 +15,6 @@ class ProductForm extends Component {
     return (
       <div>
         <Row>
-          <Col xs={12}>
-            <h2>{ this.props.productData.brand ? `${this.props.productData.brand} ${this.props.productData.model}` : translations.general.newProduct }</h2>
-          </Col>
-        </Row>
-
-        <Row>
           <Col xs={12} md={6}>
             <FieldGroup
               id="brand"

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Col, Row, Panel } from 'react-bootstrap';
+import { PageHeader, Button, Col, Row, Panel } from 'react-bootstrap';
 import ProductForm from './ProductForm';
 
 // Takes in an array of Product objects
 // Renders a ProductForm for each object
 class ProductFormContainer extends Component {
+  getTitle(index) {
+    return <h2>{ this.props.products[index].brand ? `${this.props.products[index].brand} ${this.props.products[index].model}` : this.props.translations.general.newProduct }</h2>
+  }
+
   render() {
     const products = this.props.products;
 
@@ -12,13 +16,13 @@ class ProductFormContainer extends Component {
       <div>
         <Row>
           <Col xs={12}>
-            <h1>{ this.props.translations.general.title }</h1>
+            <PageHeader>{ this.props.translations.general.title }</PageHeader>
           </Col>
         </Row>
 
         {products.map((product, index) => 
           <div key={index}>
-            <Panel>
+            <Panel header={this.getTitle(index)} bsStyle="primary">
               <ProductForm
                 translations={ this.props.translations }
                 productData={ products[index] }
@@ -27,6 +31,19 @@ class ProductFormContainer extends Component {
                 getFiles={ (e) => { this.props.getFiles(index, e) }}
               />
             </Panel>
+
+
+            <Row>
+              <Col xs={12}>
+                <Button
+                  onClick={this.props.createProductForm.bind(this)}
+                  bsStyle="primary"
+                  className="center button--add-product"
+                >
+                  { this.props.translations.general.newProduct }
+                </Button>
+              </Col>
+            </Row>
           </div>
         )}
       </div>
