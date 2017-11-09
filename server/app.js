@@ -11,12 +11,17 @@ var mail = require('./routes/mail');
 
 var app = express();
 
+// Get reference to the client build directory
+var staticFiles = express.static(path.join(__dirname, '../../client/build'))
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// pass the static files (react app) to the express app. 
+app.use(staticFiles);
 app.use(logger('dev'));
 app.use(bodyParser.json({
   limit: '50mb'

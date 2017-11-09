@@ -12,12 +12,6 @@ function sendMail(email, cb) {
       pass: process.env.GMAIL_PASSWORD
     }
   });
-
-  console.log("Sending mail with config:", {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASSWORD,
-    to: process.env.EMAIL_RECIPIENT
-  });
   
   const mailOptions = {
     from: 'tradebot@cameraventures.com',
