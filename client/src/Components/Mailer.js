@@ -40,7 +40,7 @@ class Mailer {
                   <Span style={styles.property}>Model:</Span> { product.model }
                 </Item>
                 <Item>
-                  <Span style={styles.propert}>Condition:</Span> { product.condition }
+                  <Span style={styles.property}>Condition:</Span> { product.condition }
                 </Item>
 
 
