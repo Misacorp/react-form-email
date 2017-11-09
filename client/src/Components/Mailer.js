@@ -89,7 +89,7 @@ class Mailer {
     .then(this.errorify)
     .then((response) => {
       if(response) {
-        if(response.status == 200) {
+        if(response.status === 200) {
           cb({
             result: "success"
           });

@@ -4,8 +4,6 @@ class Product {
     this.model = model || '';
     this.condition = condition || 'unknown';
     this.files = files && files.constructor === Array ? files : [];
-
-    console.log(this.files);
   }
   
   setProperty(property, value) {

@@ -131,11 +131,11 @@ class App extends Component {
     // Send mail and handle result in a callback function.
     mailer.sendMail(email, (response) => {
       // Mail sent successfully
-      if(response.result == 'success') {
+      if(response.result === 'success') {
         this.resetForm();
       }
       // Mail could not be sent
-      else if(response.result == 'error') {
+      else if(response.result === 'error') {
         console.log("Mail could not be sent.", response);
       }
       // Unknown error

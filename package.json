@@ -1,25 +1,25 @@
 {
   "name": "react-form-email",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "cors": "^2.8.4",
-    "fetch-error": "^1.0.0",
-    "fs": "0.0.1-security",
-    "nodemailer": "^4.3.1",
-    "react": "^16.0.0",
-    "react-bootstrap": "^0.31.5",
-    "react-dom": "^16.0.0",
-    "react-file-base64": "^1.0.3",
-    "react-html-email": "^3.0.0",
-    "react-materialize": "^1.0.16",
-    "react-scripts": "1.0.16"
-  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "install": "(cd client && npm) && (cd server && npm)",
+    "start": "concurrently \"cd client && PORT=3000 npm start\" \"cd server && PORT=3001 npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "proxy": "http://localhost:3001"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Misacorp/react-form-email.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Misacorp/react-form-email/issues"
+  },
+  "homepage": "https://github.com/Misacorp/react-form-email#readme",
+  "dependencies": {
+    "concurrently": "^3.5.0"
+  }
 }

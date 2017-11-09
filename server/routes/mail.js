@@ -13,14 +13,21 @@ function sendMail(email, cb) {
     }
   });
 
-  console.log("Sending mail");
+  console.log("Sending mail with config:", {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASSWORD,
+    to: process.env.EMAIL_RECIPIENT
+  });
   
   const mailOptions = {
-    from: process.env.GMAIL_USER,
+    from: 'tradebot@cameraventures.com',
     to: process.env.EMAIL_RECIPIENT,
     subject: "Offer Request",
     html: email.html,
-    attachments: email.attachments
+    attachments: email.attachments,
+    headers: {
+      'Reply-To': 'custom@reply-to.address'
+    }
   }
 
   // Debug
@@ -79,6 +86,14 @@ router.post('/', function(req, res, next) {
       res.status(200);
       res.send( response );
     }
+  });
+});
+
+
+router.get('/', function(req, res, next) {
+  res.json({
+    route: "/mail",
+    status: "operational"
   });
 });
 
