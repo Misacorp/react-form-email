@@ -4,7 +4,10 @@
     "title": "Sell to Us",
     "newProduct": "New Product",
     "product": "Product",
-    "submit": "Submit"
+    "submit": "Submit",
+    "loading": "Loading...",
+    "complete": "Thank you!",
+    "error": "Something went wrong. We're terribly sorry! Please check back later."
   },
   "brand": {
     "name": "Brand",

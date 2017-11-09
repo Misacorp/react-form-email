@@ -31,21 +31,20 @@ class ProductFormContainer extends Component {
                 getFiles={ (e) => { this.props.getFiles(index, e) }}
               />
             </Panel>
-
-
-            <Row>
-              <Col xs={12}>
-                <Button
-                  onClick={this.props.createProductForm.bind(this)}
-                  bsStyle="primary"
-                  className="center button--add-product"
-                >
-                  { this.props.translations.general.newProduct }
-                </Button>
-              </Col>
-            </Row>
           </div>
         )}
+
+        <Row>
+          <Col xs={12}>
+            <Button
+              onClick={this.props.createProductForm.bind(this)}
+              bsStyle="primary"
+              className="center button--add-product"
+            >
+              { this.props.translations.general.newProduct }
+            </Button>
+          </Col>
+        </Row>
       </div>
     )
   }

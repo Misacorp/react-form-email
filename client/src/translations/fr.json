@@ -4,7 +4,10 @@
     "title":"Vendez-nous",
     "newProduct":"Nouveau Produit",
     "product":"Produit",
-    "submit":"Envoyer"
+    "submit":"Envoyer",
+    "loading": "Chargement...",
+    "complete": "Je vous remercie!",
+    "error": "Something went wrong. We're terribly sorry! Please check back later."
   },
   "brand":{
     "name":"Marque",

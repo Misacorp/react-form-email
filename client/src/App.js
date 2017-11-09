@@ -25,13 +25,16 @@ class App extends Component {
         phone: '',
         email: '',
         country: ''
-      }
+      },
+      status: 'ready'
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
+
+  // Resets form state
   resetForm() {
     this.setState({
       products: [
@@ -43,7 +46,10 @@ class App extends Component {
         email: '',
         country: ''
       }
-    })
+    });
+
+    // After 5 seconds, reset form submission result message
+    setTimeout(function() { this.setState({...this.state, status: 'ready'}); }.bind(this), 5000);
   }
 
 
@@ -117,6 +123,12 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
+    // Display feedback of loading
+    this.setState({
+      ...this.state,
+      status: 'loading'
+    })
+
     // Construct object that is to be submitted
     const formData = this.state;
     // Add language to form data
@@ -133,16 +145,60 @@ class App extends Component {
       // Mail sent successfully
       if(response.result === 'success') {
         this.resetForm();
+        this.setState({
+          ...this.state,
+          status: 'complete'
+        });
       }
       // Mail could not be sent
       else if(response.result === 'error') {
         console.log("Mail could not be sent.", response);
+        this.setState({
+          ...this.state,
+          status: 'error'
+        });
       }
       // Unknown error
       else {
         console.log("Unknown error when sending mail.");
+        this.setState({
+          ...this.state,
+          status: 'error'
+        });
       }
     });
+  }
+
+
+  // Get Submit status
+  getSubmitStatus() {
+    switch(this.state.status) {
+      case 'ready':
+        return {
+          status: this.state.translations.general.submit,
+          style: 'primary'
+        }
+      case 'loading':
+        return {
+          status: this.state.translations.general.loading,
+          style: 'warning'
+        }
+      case 'complete':
+        return {
+          status: this.state.translations.general.complete,
+          style: 'success'
+        }
+      case 'error':
+        return {
+          status: this.state.translations.general.error,
+          style: 'danger'
+        }
+      default:
+        return {
+          status: this.state.translations.general.submit,
+          style: 'primary'
+        }
+    }
   }
 
 
@@ -218,7 +274,7 @@ class App extends Component {
             <Col xs={12}>
               <Panel
                 header={<h2>{ this.state.translations.user.contactInformation }</h2>}
-                bsStyle="success">
+                bsStyle={ this.getSubmitStatus().style }>
                 
                 <UserForm
                   translations={ this.state.translations.user }
@@ -232,10 +288,10 @@ class App extends Component {
                       type="submit"
                       bsSize="large"
                       className="center button--submit"
-                      bsStyle="success"
+                      bsStyle={ this.getSubmitStatus().style }
                       disabled={!this.canSubmit(this.state)}
                     >
-                      { this.state.translations.general.submit }
+                      { this.getSubmitStatus().status }
                     </Button>
                   </Col>
                 </Row>

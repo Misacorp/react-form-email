@@ -25,13 +25,12 @@ function sendMail(email, cb) {
   }
 
   // Debug
-  console.log("Attachments:");
-  for(let i = 0; i < email.attachments.length; i++) {
-    console.log("Filename: " + email.attachments[i].filename);
-  }
+  // console.log("Attachments:");
+  // for(let i = 0; i < email.attachments.length; i++) {
+  //   console.log("Filename: " + email.attachments[i].filename);
+  // }
 
   transporter.sendMail(mailOptions, (err, info) => {
-    console.log("mailOptions", mailOptions);
     cb(err, info)
   });
 }
