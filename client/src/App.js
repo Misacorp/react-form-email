@@ -251,7 +251,7 @@ class App extends Component {
     // Change the button event handlers: https://stackoverflow.com/questions/29810914/react-js-onclick-cant-pass-value-to-method
     return (
       <div>
-        <Banner />
+        <Banner href={"//cameraventures.com" + (this.state.translations === fr ? '/france' : '')} />
         <div className="AppPage">
           <Row>
             <Col xs={12} className="center">

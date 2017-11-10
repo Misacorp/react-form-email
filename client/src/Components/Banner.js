@@ -5,7 +5,13 @@ class Banner extends Component {
   render() {
     return(
       <div className="banner">
-        <Image src='assets/img/cameraventures-logo-small.png' alt='Cameraventures logo' className="center" responsive />
+        <a href={ this.props.href }>
+          <Image
+            src='assets/img/cameraventures-logo-small.png'
+            alt='Cameraventures logo'
+            className="center"
+            responsive />
+        </a>
       </div>
     )
   }
