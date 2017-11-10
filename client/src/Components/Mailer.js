@@ -15,6 +15,24 @@ class Mailer {
       property: {
         color: '#777',
         fontWeight: 'bold',
+      },
+      condition: {
+        perfect: {
+          border: '2px solid purple',
+          marginTop: '5px'
+        },
+        good: {
+          border: '2px solid green',
+          marginTop: '5px'
+        },
+        broken: {
+          border: '2px solid red',
+          marginTop: '5px'
+        },
+        unknown: {
+          border: '2px solid gray',
+          marginTop: '5px'
+        }
       }
     }
 
@@ -44,7 +62,11 @@ class Mailer {
         { state.products.map(function(product, index) {
           return (
             <Item key={index}>
-              <Box cellPadding={5} width="100%" style={{ border: '1px solid #AAA', marginTop: '5px' }}>
+              <Box
+                cellPadding={5}
+                width="100%"
+                style={ styles.condition[product.condition] }
+              >
                 <Item>
                   <Span style={styles.property}>Brand:</Span> { product.brand }
                 </Item>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Col, Row, Button, Panel } from 'react-bootstrap';
 import './App.css';
 import Product from './Components/Product';
@@ -6,18 +6,19 @@ import ProductFormContainer from './Components/ProductFormContainer';
 import Mailer from './Components/Mailer';
 import UserForm from './Components/UserForm';
 import Banner from './Components/Banner';
+import ReactQueryParams from 'react-query-params';
 
 // Translations
 import en from './translations/en.json';
 import fr from './translations/fr.json';
 
-class App extends Component {
+class App extends ReactQueryParams {
   constructor() {
     super();
 
     this.state = {
       //  Define translation object
-      translations: en,
+      translations: this.handleQueryParams().lang,
       products: [
         new Product(),
       ],
@@ -52,6 +53,27 @@ class App extends Component {
     // After 5 seconds, reset form submission result message
     setTimeout(function() { this.setState({...this.state, status: 'ready'}); }.bind(this), 5000);
   }
+
+
+  // Process query parameters here
+  handleQueryParams() {
+    let params = {};
+
+    // Process language parameter
+    let queryLang = this.queryParams.lang;
+    if(!queryLang || queryLang === 'en') {
+      params.lang = en;
+    }
+    if(queryLang === 'fr') {
+      params.lang = fr;
+    }
+    else {
+      params.lang = en;
+    }
+    
+    return params;
+  }
+
 
 
   changeLanguage(lang) {

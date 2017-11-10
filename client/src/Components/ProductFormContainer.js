@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, PageHeader, Button, Col, Row, Panel } from 'react-bootstrap';
+import { Button, Col, Row, Panel } from 'react-bootstrap';
 import ProductForm from './ProductForm';
 
 // Takes in an array of Product objects
