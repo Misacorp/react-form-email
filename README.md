@@ -3,3 +3,9 @@
 
 Build a React form and send its content by email
 
+# Getting started
+
+```
+npm install
+npm run start
+```
