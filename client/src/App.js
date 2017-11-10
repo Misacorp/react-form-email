@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Col, Row, Button, Panel } from 'react-bootstrap';
 import './App.css';
 import Product from './Components/Product';
@@ -6,19 +6,18 @@ import ProductFormContainer from './Components/ProductFormContainer';
 import Mailer from './Components/Mailer';
 import UserForm from './Components/UserForm';
 import Banner from './Components/Banner';
-import ReactQueryParams from 'react-query-params';
 
 // Translations
 import en from './translations/en.json';
 import fr from './translations/fr.json';
 
-class App extends ReactQueryParams {
+class App extends Component {
   constructor() {
     super();
 
     this.state = {
       //  Define translation object
-      translations: this.handleQueryParams().lang,
+      translations: this.getLangFromURI(),
       products: [
         new Product(),
       ],
@@ -55,23 +54,13 @@ class App extends ReactQueryParams {
   }
 
 
-  // Process query parameters here
-  handleQueryParams() {
-    let params = {};
 
-    // Process language parameter
-    let queryLang = this.queryParams.lang;
-    if(!queryLang || queryLang === 'en') {
-      params.lang = en;
+  getLangFromURI() {
+    let pathname = window.location.pathname;
+    if(pathname.includes('vendre')) {
+      return fr;
     }
-    if(queryLang === 'fr') {
-      params.lang = fr;
-    }
-    else {
-      params.lang = en;
-    }
-    
-    return params;
+    else return en;
   }
 
 
