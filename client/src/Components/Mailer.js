@@ -42,7 +42,7 @@ class Mailer {
         </Item>
 
         { state.products.map(function(product, index) {
-          return ( 
+          return (
             <Item key={index}>
               <Box cellPadding={5} width="100%" style={{ border: '1px solid #AAA', marginTop: '5px' }}>
                 <Item>
@@ -94,7 +94,7 @@ class Mailer {
   // Send form data to back end form handler.
   sendMail(data, cb) {
     // Send email to backend
-    fetch('/mail', {
+    fetch('mail', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
